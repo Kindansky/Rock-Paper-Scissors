@@ -47,12 +47,10 @@ function game() {
         batt = battle();
             
         if (batt.search("Win") > -1) playerScore += 1;
-        else if (batt.search("Lose") > -1) computerScore += 1; 
+        else if (batt.search("Lose") > -1) computerScore += 1;
+        else if (batt.search("Draw") > -1) i--;
     }
-
-    let score = (playerScore - computerScore);
     
-    if (score > 0) return "Player Wins!";
-    else if (score < 0) return "Computer Wins!";
-    else return "It's a Draw!";    
+    if (playerScore > computerScore) return "Player Wins!";
+    else if (computerScore > playerScore) return "Computer Wins!";
 }
