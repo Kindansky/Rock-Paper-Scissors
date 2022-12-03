@@ -40,8 +40,8 @@ let battle = function playerVsComputer() {
 
 function game() {
 
-    playerScore = 0;
-    computerScore = 0;
+    let playerScore = 0;
+    let computerScore = 0;
 
     for (let i = 0; i < 5; i++) {
         batt = battle();
@@ -49,8 +49,8 @@ function game() {
         if (batt.search("Win") > -1) playerScore += 1;
         else if (batt.search("Lose") > -1) computerScore += 1; 
     }
-    
-    score = (playerScore - computerScore);
+
+    let score = (playerScore - computerScore);
     
     if (score > 0) return "Player Wins!";
     else if (score < 0) return "Computer Wins!";
