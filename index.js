@@ -13,20 +13,24 @@ let computer = function getComputerChoice() {
 }
 
 // let question = prompt("What's is your choice?");
-
-let player = function transformQuestion() {
+/*let player = function transformQuestion() {
     let first = question.slice(0,1).toUpperCase();
     let rest = question.slice(1).toLowerCase();
     return (first + rest);
-}
+};*/
 
-let battle = function playerVsComputer() {
-    question = prompt("What's is your choice?");
-    let p = player();
+const buttons = document.querySelectorAll("button");
+const score = document.querySelector(".score");
+const result = document.querySelector(".result");
+
+let battle = function playerVsComputer(p) {
+
+    //question = prompt("What's is your choice?");
+    //let p = player;
     let c = computer();
 
     if (p === "Rock" && c === "Rock") return "Draw! Both picked Rock";
-    else if (p === "Rock" && c === "Paper") return "You Lose! Paper beats Rock";
+    else if (p === "Rock" && c === "Paper") return  "You Lose! Paper beats Rock";
     else if ( p === "Rock" && c === "Scissor") return "You Win! Rock beats Scissor";
 
     else if (p === "Paper" && c === "Rock") return "You Win! Paper beats Rock";
@@ -36,21 +40,34 @@ let battle = function playerVsComputer() {
     else if (p === "Scissor" && c === "Rock") return "You Lose! Rock beats Scissor";
     else if (p === "Scissor" && c === "Paper") return "You Win! Scissor beats Paper";
     else if ( p === "Scissor" && c === "Scissor") return "Draw! Both picked Scissor";
-}
+};
+
+let playerScore = 0;
+let computerScore = 0;
 
 function game() {
+    if (playerScore == 5 || computerScore == 5 || 
+        result.innerHTM == "Player Wins!" || result.innerHTML == "Computer Wins!") {
+        playerScore = 0;
+        computerScore = 0;
+        result.innerHTML = "";
+    };
 
-    let playerScore = 0;
-    let computerScore = 0;
+    let player = this.innerText;
 
-    for (let i = 0; i < 5; i++) {
-        batt = battle();
-            
-        if (batt.search("Win") > -1) playerScore += 1;
-        else if (batt.search("Lose") > -1) computerScore += 1;
-        else if (batt.search("Draw") > -1) i--;
-    }
-    
-    if (playerScore > computerScore) return "Player Wins!";
-    else if (computerScore > playerScore) return "Computer Wins!";
-}
+    batt = battle(player);
+
+    result.innerHTML = batt;
+
+    if (batt.search("Win") > -1) playerScore += 1;
+    else if (batt.search("Lose") > -1) computerScore += 1;
+
+    score.innerHTML = "Player:" + " " + playerScore + " " + "Computer:" + " " + computerScore;
+
+    if (playerScore == 5) result.innerHTML = "Player Wins!";
+    else if (computerScore == 5) result.innerHTML = "Computer Wins!";
+};
+
+for (const btn of buttons) {
+    btn.addEventListener("click", game);
+};
